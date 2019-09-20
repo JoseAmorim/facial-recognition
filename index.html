@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Reconhecimento facial</title>
+    <style>
+        video,
+        canvas {
+            position: absolute;
+            border: 1px solid red;
+        }
+    </style>
+</head>
+
+<body>
+    <video id='video' width='320' height='240' preload autoplay loop muted></video>
+    <canvas id="canvas" width="320" height="240"></canvas>
+
+    <script src="tracking-min.js"></script>
+    <script src="data/face-min.js"></script>
+    <script src="data/eye-min.js"></script>
+    <script>
+        const init = () => {
+            const video = document.getElementById('video')
+            const canvas = document.getElementById('canvas')
+            const context = canvas.getContext('2d')
+            const tracker = new tracking.ObjectTracker(['face', 'eye'])
+
+            tracking.track('#video', tracker, { camera: true })
+            tracker.on('track', event => {
+                // console.log(event)
+                context.clearRect(0, 0, canvas.width, canvas.height)
+
+                event.data.forEach(rect => {
+                    context.strokeStyle = '#f00'
+                    context.lineWidth = 2
+                    context.strokeRect(rect.x, rect.y, rect.width, rect.height)
+                    context.fillText(`x: ${rect.x}, w: ${rect.width}`, rect.x + rect.width + 20, rect.y + 20)
+                    context.fillText(`y: ${rect.y}, h: ${rect.height}`, rect.x + rect.width + 20, rect.y + 40)
+                })
+            })
+
+        }
+
+        window.onload = init()
+    </script>
+</body>
+
+</html>
