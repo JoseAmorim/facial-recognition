@@ -10,9 +10,6 @@ You'll need a Live Server plugin on VScode or something similar.
 
 Open the Live Server and enable the webcam on the browser
 
-## License
-[MIT](https://choosealicense.com/licenses/mit/)
-
 ## Technology
 
 - JavaScript
@@ -21,3 +18,7 @@ Open the Live Server and enable the webcam on the browser
 ## Urls
 
 [Tracking](https://trackingjs.com/)
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
